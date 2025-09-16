@@ -1,4 +1,6 @@
 # Serverless Web Application with AWS Lambda and DynamoDB
+**Tanmay Ranaware**  
+CMPE 272 - Enterprise Software Development
 
 A serverless web application built with AWS Lambda and Amazon DynamoDB that provides CRUD operations for student records management.
 
@@ -241,22 +243,6 @@ Your Lambda function requires the following DynamoDB permissions:
   ]
 }
 ```
-
-## 🚨 Error Handling
-
-The Lambda function includes basic error handling for:
-- Missing required parameters
-- DynamoDB operation failures
-- Invalid JSON in request body
-- Student not found scenarios
-
-## 📈 Monitoring
-
-Monitor your application using:
-- AWS CloudWatch Logs for Lambda function logs
-- AWS CloudWatch Metrics for performance monitoring
-- DynamoDB CloudWatch metrics for database performance
-
 ## 🛠️ Development
 
 ### Local Development
@@ -286,8 +272,6 @@ zip lambda_function.zip lambda_function.py
 
 - ✅ Create student records (POST)
 - ✅ Read student records (GET)
-- ✅ Update student records (PUT)
-- ✅ Delete student records (DELETE)
 - ✅ Error handling and validation
 - ✅ JSON request/response format
 - ✅ DynamoDB integration
@@ -317,8 +301,7 @@ zip lambda_function.zip lambda_function.py
 
 ## 👨‍💻 Author
 
-**Tanmay Ranaware**  
-CMPE 272 - Enterprise Software Development
+
 
 ## 📄 License
 
