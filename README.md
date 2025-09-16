@@ -12,9 +12,7 @@ A serverless web application built with AWS Lambda and Amazon DynamoDB that prov
 ## 🏗️ Architecture
 
 ```
-API Gateway → AWS Lambda → DynamoDB
-     ↓            ↓           ↓
-  HTTP Requests → Function → StudentRecords Table
+Postman -> API Gateway -> AWS Lambda -> DynamoDB
 ```
 
 ## 📋 Prerequisites
