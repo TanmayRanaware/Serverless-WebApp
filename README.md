@@ -1,4 +1,5 @@
 # Serverless Web Application with AWS Lambda and DynamoDB
+CMPE 272 - Enterprise Software Development
 
 A serverless web application built with AWS Lambda and Amazon DynamoDB that provides CRUD operations for student records management.
 
@@ -11,9 +12,7 @@ A serverless web application built with AWS Lambda and Amazon DynamoDB that prov
 ## 🏗️ Architecture
 
 ```
-API Gateway → AWS Lambda → DynamoDB
-     ↓            ↓           ↓
-  HTTP Requests → Function → StudentRecords Table
+Postman -> API Gateway -> AWS Lambda -> DynamoDB
 ```
 
 ## 📋 Prerequisites
@@ -62,8 +61,15 @@ Serverless-WebApp/
 ├── lambda_function.py    # Main Lambda function with CRUD operations
 ├── requirements.txt      # Python dependencies
 ├── .gitignore           # Git ignore file
-└── README.md            # Project documentation
+├── README.md            # Project documentation
+└── screenshots/         # Screenshots directory
+    ├── README.md        # Screenshot instructions
+    ├── postman-post-request.png    # POST request screenshot
+    ├── postman-get-request.png     # GET request screenshot
+    └── dynamodb-table-records.png  # DynamoDB table screenshot
 ```
+
+> **Note:** Please add the actual screenshots to the `screenshots/` directory as described in the [Screenshots README](./screenshots/README.md)
 
 ## 🔧 API Endpoints
 
@@ -105,12 +111,71 @@ DELETE /students?student_id=123
 
 ## 🧪 Testing
 
+### Using Postman
+
+The following screenshots demonstrate successful API testing using Postman:
+
+#### 1. Creating a Student Record (POST Request)
+![POST Request - Create Student](./screenshots/postman-post-request.png)
+
+**Request Details:**
+- **Method:** POST
+- **URL:** `https://19a89xza8h.execute-api.us-east-2.amazonaws.com/StudentRecord`
+- **Body:** JSON with student information
+- **Response:** 200 OK - "Student record added successfully"
+
+**Sample Request Body:**
+```json
+{
+  "student_id": "999",
+  "name": "Tanmay Ranaware",
+  "course": "CMPE 272- Enterprise Software",
+  "email": "tanmayranware14@gmail.com"
+}
+```
+
+#### 2. Retrieving a Student Record (GET Request)
+![GET Request - Retrieve Student](./screenshots/postman-get-request.png)
+
+**Request Details:**
+- **Method:** GET
+- **URL:** `https://19a89xza8h.execute-api.us-east-2.amazonaws.com/StudentRecord?student_id=999`
+- **Response:** 200 OK with complete student data
+- **Response Time:** 134ms
+
+**Sample Response:**
+```json
+{
+  "name": "Tanmay Ranaware",
+  "course": "CMPE 272- Enterprise Software",
+  "student_id": "999",
+  "email": "tanmayranware14@gmail.com"
+}
+```
+
+#### 3. DynamoDB Table with Sample Records
+![DynamoDB Table - StudentRecords](./screenshots/dynamodb-table-records.png)
+
+**DynamoDB Console Screenshot:**
+- **Table Name:** StudentRecords
+- **Items Returned:** 5 records
+- **Scan Efficiency:** 100%
+- **RCUs Consumed:** 2
+
+**Sample Data in Table:**
+| student_id | name | course | email |
+|------------|------|--------|-------|
+| 999 | Tanmay Ranaware | CMPE 272- Enterprise Software | tanmayranware14@gmail.com |
+| 891 | Tom Davis | Enterprise Software | - |
+| 567 | Tom Davis | Enterprise Software | - |
+| 345 | John Doe | Enterprise Software | - |
+
 ### Using curl
 
 **Create a student:**
 ```bash
 curl -X POST \
-  https://<your-api-id>.execute-api.<region>.amazonaws.com/dev/students \
+  https://19a89xza8h.execute-api.us-east-2.amazonaws.com/StudentRecord \
   -H 'Content-Type: application/json' \
   -d '{
     "student_id": "123",
@@ -123,13 +188,13 @@ curl -X POST \
 **Get a student:**
 ```bash
 curl -X GET \
-  https://<your-api-id>.execute-api.<region>.amazonaws.com/dev/students?student_id=123
+  https://19a89xza8h.execute-api.us-east-2.amazonaws.com/StudentRecord?student_id=123
 ```
 
 **Update a student:**
 ```bash
 curl -X PUT \
-  https://<your-api-id>.execute-api.<region>.amazonaws.com/dev/students \
+  https://19a89xza8h.execute-api.us-east-2.amazonaws.com/StudentRecord \
   -H 'Content-Type: application/json' \
   -d '{
     "student_id": "123",
@@ -142,14 +207,8 @@ curl -X PUT \
 **Delete a student:**
 ```bash
 curl -X DELETE \
-  https://<your-api-id>.execute-api.<region>.amazonaws.com/dev/students?student_id=123
+  https://19a89xza8h.execute-api.us-east-2.amazonaws.com/StudentRecord?student_id=123
 ```
-
-### Using Postman
-
-1. Import the API collection (if available)
-2. Set the base URL to your API Gateway endpoint
-3. Test each endpoint with appropriate request bodies
 
 ## 📊 DynamoDB Table Schema
 
@@ -181,22 +240,6 @@ Your Lambda function requires the following DynamoDB permissions:
   ]
 }
 ```
-
-## 🚨 Error Handling
-
-The Lambda function includes basic error handling for:
-- Missing required parameters
-- DynamoDB operation failures
-- Invalid JSON in request body
-- Student not found scenarios
-
-## 📈 Monitoring
-
-Monitor your application using:
-- AWS CloudWatch Logs for Lambda function logs
-- AWS CloudWatch Metrics for performance monitoring
-- DynamoDB CloudWatch metrics for database performance
-
 ## 🛠️ Development
 
 ### Local Development
@@ -226,8 +269,6 @@ zip lambda_function.zip lambda_function.py
 
 - ✅ Create student records (POST)
 - ✅ Read student records (GET)
-- ✅ Update student records (PUT)
-- ✅ Delete student records (DELETE)
 - ✅ Error handling and validation
 - ✅ JSON request/response format
 - ✅ DynamoDB integration
@@ -257,8 +298,7 @@ zip lambda_function.zip lambda_function.py
 
 ## 👨‍💻 Author
 
-**Tanmay Ranaware**  
-CMPE 272 - Enterprise Software Development
+
 
 ## 📄 License
 
