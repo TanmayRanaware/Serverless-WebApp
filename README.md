@@ -1,5 +1,4 @@
 # Serverless Web Application with AWS Lambda and DynamoDB
-**Tanmay Ranaware**  
 CMPE 272 - Enterprise Software Development
 
 A serverless web application built with AWS Lambda and Amazon DynamoDB that provides CRUD operations for student records management.
